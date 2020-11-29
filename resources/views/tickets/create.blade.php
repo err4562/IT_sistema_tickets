@@ -1,6 +1,68 @@
 @extends('layouts.app')
 @section('title', 'Open Ticket')
 @section('content')
+    <div class="max-w-2xl bg-white py-5 px-5 m-auto w-full mt-10">
+
+        <div class="text-3xl mb-3 text-center ">
+            Abrir un Nuevo Ticket
+        </div>
+
+        @if (session('status'))
+            <div class="alert alert-success">
+                {{ session('status') }}
+            </div>
+        @endif
+
+        <div class="form mt-4 p-6 flex flex-col justify-center">
+            {!! csrf_field() !!}
+
+            <div class="flex flex-col mt-2"{{ $errors->has('title') ? ' has-error' : '' }}">
+            <p class="flex flex-col mt-2 justify-center sm:text-base text-center text-black ">Titulo </p>
+
+        <label for="title" class="hidden">Titulo</label><p class="flex flex-col mt-2 text-center text-gray-400 ">Escriba un un breve titulo para su ticket </p>
+        <input id= "title" type="text" class="w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 text-gray-800 font-semibold focus:border-indigo-500 focus:outline-none" placeholder="Titulo" name="title" value="{{ old('title') }}"/>
+        @if ($errors->has('title'))
+            <span class="help-block">
+                    <strong>{{ $errors->first('title') }}</strong>
+                </span>
+        @endif
+    </div>
+
+
+    <div class="flex flex-col mt-2">
+        <div class="options md:flex md:space-x-6 text-sm items-center w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 text-gray-800 font-semibold focus:border-indigo-500 focus:outline-none">
+            <p class="flex flex-col mt-2 text-gray-400 ">Seleccione una Categoria </p>
+            <select class="w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 text-gray-800 font-semibold focus:border-indigo-500 focus:outline-none">
+                <option value="select" selected></option>
+                <option value="bug">report a bug</option>
+                <option value="feature">Request a feature</option>
+                <option value="feedback">Feedback</option>
+            </select>
+            <p class="flex flex-col mt-2 text-gray-400 font-semibold">Indique la Prioridad </p>
+            <select class="w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 text-gray-800 font-semibold focus:border-indigo-500 focus:outline-none">
+                <option value="select" selected></option>
+                <option value="bug">Low</option>
+                <option value="feature">Medium</option>
+                <option value="feedback">High</option>
+            </select>
+        </div>
+    </div>
+
+    {{--<div class="flex flex-col mt-2">
+        <input type="text" class="w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 text-gray-800 font-semibold focus:border-indigo-500 focus:outline-none" placeholder="Email Address"/>
+    </div>--}}
+
+    <div class="col-span-2">
+        <textarea cols="68" rows="10" class="w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 text-gray-800 font-semibold focus:border-indigo-500 focus:outline-none" placeholder="Message"></textarea>
+    </div>
+
+    <div class="col-span-2 text-right">
+        <button class="py-3 px-6 bg-green-500 text-white font-bold w-full sm:w-32">
+            Submit
+        </button>
+    </div>
+    </div>
+
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
@@ -79,34 +141,4 @@
             </div>
         </div>
     </div>
-
-    <div class="max-w-2xl bg-white py-10 px-5 m-auto w-full mt-10">
-
-        <div class="text-3xl mb-6 text-center ">
-            Open New Ticket
-        </div>
-
-        <div class="grid grid-cols-2 gap-4 max-w-xl m-auto">
-
-            <div class="col-span-2 lg:col-span-1">
-                <input type="text" class="border-solid border-gray-400 border-2 p-3 md:text-xl w-full" placeholder="Name"/>
-            </div>
-
-            <div class="col-span-2 lg:col-span-1">
-                <input type="text" class="border-solid border-gray-400 border-2 p-3 md:text-xl w-full" placeholder="Email Address"/>
-            </div>
-
-            <div class="col-span-2">
-                <textarea cols="30" rows="8" class="border-solid border-gray-400 border-2 p-3 md:text-xl w-full" placeholder="Message"></textarea>
-            </div>
-
-            <div class="col-span-2 text-right">
-                <button class="py-3 px-6 bg-green-500 text-white font-bold w-full sm:w-32">
-                    Submit
-                </button>
-            </div>
-
-        </div>
-    </div>
-
 @endsection
