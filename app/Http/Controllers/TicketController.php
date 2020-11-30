@@ -7,6 +7,7 @@ use App\Models\Ticket;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class TicketController extends Controller
 {
@@ -59,7 +60,9 @@ class TicketController extends Controller
         ]);
         $ticket->save();
         $mailer->sendTicketInformation(Auth::user(), $ticket);
-        return redirect()->back()->with("status", "A ticket with ID: #$ticket->ticket_id has been opened.");
+        Alert::success('Ticket Creado Satisfactoriamente!!', "El ticket con ID: #$ticket->ticket_id ha sido abierto a su nombre.");
+        return redirect()->back()->with("status", "El ticket con ID: #$ticket->ticket_id ha sido abierto a su nombre.");
+
     }
     public function userTickets()
     {
